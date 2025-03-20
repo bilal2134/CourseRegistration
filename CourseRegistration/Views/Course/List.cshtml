@@ -1,0 +1,33 @@
+﻿@model IEnumerable<global::CourseRegistration.Models.Course>
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<h2>Available Courses</h2>
+
+<form method="get" asp-action="List" class="form-inline mb-3">
+    <input type="text" name="searchTerm" class="form-control mr-2" placeholder="Search by name" />
+    <button type="submit" class="btn btn-outline-primary">Search</button>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Instructor</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Name</td>
+                <td>@course.Instructor</td>
+                <td>
+                    <a href="@Url.Action("Details", "Course", new { id = course.Id })" class="btn btn-info btn-sm">View Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

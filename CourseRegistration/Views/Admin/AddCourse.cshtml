@@ -1,0 +1,25 @@
+﻿@model global::CourseRegistration.Models.Course
+@{
+    ViewData["Title"] = "Add New Course";
+}
+
+<h2>Add New Course</h2>
+
+@* Display validation errors *@
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<form asp-action="AddCourse" method="post">
+    <div class="form-group">
+        <label for="Name">Course Name</label>
+        <input type="text" class="form-control" id="Name" name="Name" required />
+    </div>
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" id="Description" name="Description"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="Instructor">Instructor</label>
+        <input type="text" class="form-control" id="Instructor" name="Instructor" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add Course</button>
+</form>
