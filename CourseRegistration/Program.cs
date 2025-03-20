@@ -32,10 +32,20 @@ app.UseRouting();
 
 app.UseSession(); // Enable session middleware
 
+app.UseAuthentication();
 app.UseAuthorization();
 
+// Redirect root URL to /Account/Login
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/Account/Login");
+    return Task.CompletedTask;
+});
+
+// Or set default route for controllers (removing any earlier conflicting default route):
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}"
+);
 
 app.Run();

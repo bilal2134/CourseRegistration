@@ -1,6 +1,8 @@
 ﻿@model global::CourseRegistration.Models.Course
 @{
     ViewData["Title"] = "Course Details";
+    Layout = "_Layout";
+
 }
 
 <h2>@Model.Name</h2>
@@ -9,15 +11,21 @@
 
 <hr />
 
-<form asp-action="Register" method="post">
-    <input type="hidden" name="courseId" value="@Model.Id" />
-    <button type="submit" class="btn btn-success">Register for this Course</button>
-</form>
+<!-- Hide register/unregister actions if user is admin -->
+@if (Context.Session.GetString("IsAdmin") != "True")
+{
+    <form asp-action="Register" method="post">
+        <input type="hidden" name="courseId" value="@Model.Id" />
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
 
-<form asp-action="Unregister" method="post" class="mt-2">
-    <input type="hidden" name="courseId" value="@Model.Id" />
-    <button type="submit" class="btn btn-danger">Unregister from this Course</button>
-</form>
+    <form asp-action="Unregister" method="post" style="display:inline-block;">
+        <input type="hidden" name="courseId" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">
+            Unregister
+        </button>
+    </form>
+}
 
 <hr />
 

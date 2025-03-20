@@ -1,13 +1,19 @@
 ﻿@model IEnumerable<global::CourseRegistration.Models.Course>
 @{
     ViewData["Title"] = "Manage Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
-<h2>Manage Courses</h2>
-<a href="@Url.Action("AddCourse", "Admin")" class="btn btn-primary mb-3">Add New Course</a>
+<h2 class="mb-4">Manage Courses</h2>
 
-<table class="table table-striped">
-    <thead>
+<!-- Add link to Course Registrations for admin -->
+<a href="@Url.Action("CourseRegistrations", "Admin")" class="btn btn-info ml-2">View Course Registrations</a>
+
+<a href="@Url.Action("AddCourse", "Admin")" class="btn btn-primary mb-3 float-right">Add New Course</a>
+
+<table class="table table-hover table-striped">
+    <thead class="thead-light">
         <tr>
             <th>Name</th>
             <th>Instructor</th>
@@ -21,10 +27,14 @@
                 <td>@course.Name</td>
                 <td>@course.Instructor</td>
                 <td>
-                    <a href="@Url.Action("EditCourse", "Admin", new { id = course.Id })" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="@Url.Action("EditCourse", "Admin", new { id = course.Id })"
+                       class="btn btn-warning btn-sm">Edit</a>
                     <form asp-action="DeleteCourse" method="post" style="display:inline-block;">
                         <input type="hidden" name="id" value="@course.Id" />
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Are you sure?');">
+                            Delete
+                        </button>
                     </form>
                 </td>
             </tr>

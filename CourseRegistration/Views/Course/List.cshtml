@@ -1,17 +1,19 @@
 ﻿@model IEnumerable<global::CourseRegistration.Models.Course>
 @{
     ViewData["Title"] = "Courses";
+    Layout = "_Layout";
+
 }
 
-<h2>Available Courses</h2>
+<h2 class="mb-4">Available Courses</h2>
 
 <form method="get" asp-action="List" class="form-inline mb-3">
     <input type="text" name="searchTerm" class="form-control mr-2" placeholder="Search by name" />
     <button type="submit" class="btn btn-outline-primary">Search</button>
 </form>
 
-<table class="table table-striped">
-    <thead>
+<table class="table table-hover table-striped">
+    <thead class="thead-light">
         <tr>
             <th>Name</th>
             <th>Instructor</th>
